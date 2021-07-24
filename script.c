@@ -657,6 +657,7 @@ int main() {
         index++;
         memset(buf, 0, sizeof(buf));
         strncpy(buf, &str[index], b);
+        printf("%d -> ", i);
         printf("%s\n", buf);
         index += b;
     }
