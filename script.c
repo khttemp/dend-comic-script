@@ -608,7 +608,7 @@ int main() {
     }
     arr[count-1] = '\0';
     
-    fp = fopen(arr, "r");
+    fp = fopen(arr, "rb");
     if (fp == NULL) {
         printf("No such file...Exit");
         return -1;
@@ -620,7 +620,7 @@ int main() {
     fseek(fp, 0, SEEK_SET);
     str = realloc(str, size * sizeof(char));
     memset(str, 0, size);
-    fread(str, sizeof(char), size, fp);
+    fread(str, size, 1, fp);
 
     count = 1;
     printf("ReadComicData speed slow? (Y/N)");
