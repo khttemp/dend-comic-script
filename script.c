@@ -600,6 +600,7 @@ int main() {
     char *str = malloc(count * sizeof(char));
     char buf[1024];
     int index;
+    printf("DEND COMIC SCRIPT ver1.1.2...\n");
     printf("input comic bin file...: ");
     while ((ch = getchar()) != '\n') {
         arr[count-1] = ch;
@@ -684,6 +685,7 @@ int main() {
         index++;
         memset(buf, 0, sizeof(buf));
         strncpy(buf, &str[index], b);
+        printf("%d -> ", i);
         printf("%s", buf);
         index += b;
         printf(", %d\n", str[index]);
