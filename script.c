@@ -600,7 +600,7 @@ int main() {
     char *str = malloc(count * sizeof(char));
     char buf[1024];
     int index;
-    printf("DEND COMIC SCRIPT ver1.1.2...\n");
+    printf("DEND COMIC SCRIPT ver1.1.3...\n");
     printf("input comic bin file...: ");
     while ((ch = getchar()) != '\n') {
         arr[count-1] = ch;
@@ -715,7 +715,7 @@ int main() {
     p_num = (int *)buf;
     num = *p_num;
     for (i = 0; i < num; i++) {
-        printf("index -> %d\n", i);
+        printf("No.%d -> index(%x)\n", i, index);
         buf[0] = str[index++];
         buf[1] = str[index++];
         p_num2 = (int *)buf;
