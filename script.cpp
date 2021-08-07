@@ -605,18 +605,21 @@ int main() {
 
     fin.close();
 
-    cout << "ReadComicDataを１行ずつ読みますか？(Y/N)";
-    cin >> input;
-
     int slowFlag;
-    if (input == "Y" || input == "y") {
-        slowFlag = 1;
-    } else if (input == "N" || input == "n") {
-        slowFlag = 0;
-    } else {
-        cout << "入力エラー！終了します。" << endl;
-        getchar();
-        return -1;
+    cout << "ReadComicDataを１行ずつ読みますか？(Y/N)";
+    while (true) {
+        cin >> input;
+
+        if (input == "Y" || input == "y") {
+            slowFlag = 1;
+            break;
+        } else if (input == "N" || input == "n") {
+            slowFlag = 0;
+            break;
+        } else {
+            cin.ignore();
+            cout << "入力エラー！改めて入力してください：";
+        }
     }
 
     int index = 16;
