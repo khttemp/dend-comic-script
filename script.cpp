@@ -594,6 +594,7 @@ int main() {
 
     ifstream fin(input, ios::in | ios::binary);
     if (!fin) {
+        cin.ignore();
         cout << "指定されたファイルが見つかりません。終了します。" << endl;
         getchar();
         return -1;
