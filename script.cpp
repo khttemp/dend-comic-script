@@ -592,6 +592,7 @@ int main() {
     ifstream fin(input, ios::in | ios::binary);
     if (!fin) {
         cout << "指定されたファイルが見つかりません。終了します。" << endl;
+        getchar();
         return -1;
     }
 
@@ -613,7 +614,8 @@ int main() {
     } else if (input == "N" || input == "n") {
         slowFlag = 0;
     } else {
-        cout << "input Error!...Exit" << endl;
+        cout << "入力エラー！終了します。" << endl;
+        getchar();
         return -1;
     }
 
@@ -621,8 +623,11 @@ int main() {
     char* buf = new char[index+1];
     memcpy(buf, &str[0], index);
     sbuf = string(buf);
+
     if (sbuf != "DEND_COMICSCRIPT") {
+        cin.ignore();
         cout << "DEND comic scriptファイルではありません。終了します。" << endl;
+        getchar();
         return -1;
     }
     delete buf;
