@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstring>
 #include <string>
+#include <Windows.h>
 #define CMD_MAX 574
 using namespace std;
 
@@ -582,6 +583,8 @@ int main() {
         "RB26",
         "SCRIPT_CMD_MAX"
     };
+
+    SetConsoleOutputCP(CP_UTF8);
 
     string sbuf;
     string input;
