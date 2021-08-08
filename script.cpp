@@ -629,6 +629,7 @@ int main() {
     int index = 16;
     char* buf = new char[index+1];
     memcpy(buf, &str[0], index);
+    buf[index] = '\0';
     sbuf = string(buf);
 
     if (sbuf != "DEND_COMICSCRIPT") {
