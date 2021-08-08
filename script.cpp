@@ -1,12 +1,33 @@
+// ‚±‚Ìƒ\ƒtƒg‚ÍH
+// “dÔ‚ÅD ŠeƒVƒŠ[ƒY‚ÌƒRƒ~ƒbƒNƒXƒNƒŠƒvƒg‚ğ‰ğÍ‚·‚éƒc[ƒ‹‚Å‚ ‚éB
+// g—p–@‚É‚Â‚¢‚Ä’nåˆê”h‚Ö‚Ì–â‚¢‡‚í‚¹‚ğs‚í‚È‚¢–B
+// ‚»‚Ì‘¼‚Ìg—p•û–@‚É‚Â‚¢‚Ä‚ÍA“Y•t‚Ì ReadMe.md ‚ğQÆ‚·‚é‚±‚ÆB
+//
+// ƒRƒ“ƒpƒCƒ‹•û–@
+// > g++ script.cpp -o script -static-libgcc -static-libstdc++
+// > cl.exe /MT script.cpp /Fe:script.exe
+// > icl.exe /MT /O2 script.cpp /Fe:script.exe
+
+// ƒwƒbƒ_[’è‹`
 #include <iostream>
+#include <cstdlib> // for system() function
 #include <fstream>
 #include <cstring>
 #include <string>
 #include <Windows.h>
-#define CMD_MAX 574
-using namespace std;
 
-int main() {
+// ƒvƒŠƒvƒƒZƒbƒT’è‹`
+#define CMD_MAX 574
+#define _MYDEBUG ( 0 )
+
+// g—p‚·‚é–¼‘O‹óŠÔ’è‹`
+using namespace std; // stdƒl[ƒ€‹óŠÔ‚ğg—p‚·‚é
+
+// ƒOƒ[ƒoƒ‹•Ï”’è‹`ƒ][ƒ“
+
+int main( int argc , char **argv ) {
+
+    // ƒRƒ~ƒbƒNƒXƒNƒŠƒvƒg‚ÌƒRƒ}ƒ“ƒh’è‹`ˆê——AˆÈ‰º600s’ö“x‘¶İ‚·‚éB
     string cmd[CMD_MAX] = {
         "Tx",
         "TxSize",
@@ -584,33 +605,124 @@ int main() {
         "SCRIPT_CMD_MAX"
     };
 
-    SetConsoleOutputCP(CP_UTF8);
+    // ƒRƒ“ƒ\[ƒ‹o—Í‚ğUTF-8‚É‚·‚éê‡‚ÉƒRƒƒ“ƒgƒAƒEƒg‚©‚ç–ß‚·B‚±‚Ìƒ\[ƒX‚àA•¶šƒR[ƒhUTF-8‚É•ÏŠ·‚·‚é‚±‚ÆB
+    //SetConsoleOutputCP(CP_UTF8);
 
+    int langmode = 0; //Œ¾Œêƒ‚[ƒhİ’èA0:“ú–{ŒêA 1: English A 2:ŠØ‘ŒêEEE
+    // ˆø”‚ÅŒ¾Œê‚ğ“–‚½‚ç“¾‚ç‚ê‚½ê‡‚Ìˆ—
+    
+    #if _MYDEBUG
+    cout << "argc: " << argc << endl;
+    cout << "argv0: " << argv[0] << endl;
+    cout << "argv1: " << argv[1] << endl;
+    #endif
+    
+    if (argc >= 2) {
+        string argv1 = argv[1];
+        if ( argv1 == "en" ) {
+            // ‰pŒê
+            langmode = 1;
+        }
+        else if (argv1 == "ja") {
+            // “ú–{Œê
+            langmode = 0;
+        }
+        else if (argv1 == "kr") {
+            // ŠØ‘ŒêADiscord ‚ÅŠØ‘Œê‚Á‚ÄŒ©‚©‚¯‚½‚©‚çB
+            langmode = 2;
+        }
+        else if (argv1 == "cn") {
+            // ’†‘ŒêB
+            langmode = 2;
+        }
+        //•K—v‚ÈŒ¾Œê‚ª‚ ‚Á‚½‚ç‚à‚Á‚Æelse if •¶‚ğ‘«‚·
+        else if (argv1 == "/help") {
+            //ƒwƒ‹ƒv‚ğˆóü‚·‚é
+            cout << "Usage: script.exe <LangageCode: en , ja , ....> <comic~.bin>" << endl;
+            cout << "g‚¢•ûF script.exe <Œ¾ŒêƒR[ƒh: en A ja AEEE> <comic~.bin>" << endl;
+            //system("pause");//‘±s‚·‚é‚É‚Í`‚ÌƒƒbƒZ[ƒW‚ğo‚·B©“®‰»‚ÌÛ‚ÍƒRƒƒ“ƒgƒAƒEƒg‚·‚é‚±‚ÆB
+            return 0;
+        }
+        else {
+            // ‰ğÍ•s”\‚Èˆø”‚ª—^‚¦‚ç‚ê‚½‚çB
+            cout << "ˆø”‚Å—^‚¦‚ç‚ê‚½Œ¾Œê‚ª“Á’è‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B( The language given in the argument could not be identified. )" << endl;
+            cout << "ƒfƒtƒHƒ‹ƒg‚Ì“ú–{Œê‚ğg—p‚µ‚Ü‚·B( Use default  Japanese language. )" << endl;
+            langmode = 0; //ƒfƒtƒHƒ‹ƒg‚Ì0
+        
+        }
+    }
+
+    /* ƒ†[ƒU[‚ÉA comic`.bin ‚ğw’è‚µ‚Ä‚à‚ç‚¤B */
     string sbuf;
     string input;
     cout << "DEND COMIC SCRIPT ver1.1.4..." << endl;
-    cout << "comicã®binãƒ•ã‚¡ã‚¤ãƒ«åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„: ";
-    cin >> input;
+    if ( argc >= 3 ) {
+        // ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”‚Å—^‚¦‚ç‚ê‚½ƒtƒ@ƒCƒ‹‚ğ“Ç‚Ş
+        if (langmode == 1) {
+            cout << "Reads the file given by the command line argument. : " << argv[2] << endl ;
+        }else{
+            cout << "ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”‚Å—^‚¦‚ç‚ê‚½ƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İ‚Ü‚·B" << endl;
+        }
+        input = string( argv[2] );
+    }
+    else {
+        // ƒ†[ƒU[w’è‚Ìƒtƒ@ƒCƒ‹–¼‚ğ“Ç‚İ‚Ş
+        if (langmode == 1) {
+            cout << "Input comic's bin filename. : ";
+        }
+        else {
+            cout << "comic‚Ìbinƒtƒ@ƒCƒ‹–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢: ";
+        }
+
+        cin >> input;
+
+    }
 
     ifstream fin(input, ios::in | ios::binary);
     if (!fin) {
+        // w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡
         cin.ignore();
-        cout << "æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚çµ‚äº†ã—ã¾ã™ã€‚" << endl;
-        getchar();
+        if (langmode == 1) {
+            cout << "The specified file was not found.  Exit this program. " << endl;
+        }
+        else {
+            cout << "w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBI—¹‚µ‚Ü‚·B" << endl;
+        }
+        //getchar();
+        system("pause");//‘±s‚·‚é‚É‚Í`‚ÌƒƒbƒZ[ƒW‚ğo‚·B©“®‰»‚ÌÛ‚ÍƒRƒƒ“ƒgƒAƒEƒg‚·‚é‚±‚ÆB
         return -1;
     }
 
-    printf("è¦‹ã¤ã‘ã¾ã—ãŸï¼\n\n");
+    // ˆÈ‰ºA comic`.bin ‚ªŒ©‚Â‚©‚Á‚½ê‡A ƒtƒ@ƒCƒ‹‚Ì’†g‚ğ‘S•”“Ç‚İ‚¾‚·B
+    //printf("Œ©‚Â‚¯‚Ü‚µ‚½I\n\n");
+    if (langmode == 1) {
+        cout << "Found It! " << endl << endl;
+    }
+    else {
+        cout << "Œ©‚Â‚¯‚Ü‚µ‚½I" << endl << endl;
+    }
     fin.seekg(0, ios::end);
     int size = fin.tellg();
     fin.seekg(0, ios::beg);
     char* str = new char[size];
     fin.read(str, size);
 
+    #if _MYDEBUG
+    cout << "size: " << size << endl;
+    cout << "str_len: " << strlen(str) << endl;
+    cout << "str: " << endl << str << endl;
+    #endif
+
     fin.close();
 
+    // ƒf[ƒ^“Ç‚İæ‚è•û–@‚Ìİ’è
     int slowFlag;
-    cout << "ReadComicDataã‚’ï¼‘è¡Œãšã¤èª­ã¿ã¾ã™ã‹ï¼Ÿ(Y/N)";
+    if (langmode == 1) {
+        cout << " Do you want to read ReadComicData line by line? (Y/N): ";
+    }
+    else {
+        cout << "ReadComicData‚ğ‚Ps‚¸‚Â“Ç‚İ‚Ü‚·‚©H(Y/N): ";
+    }
     while (true) {
         cin >> input;
 
@@ -622,24 +734,45 @@ int main() {
             break;
         } else {
             cin.ignore();
-            cout << "å…¥åŠ›ã‚¨ãƒ©ãƒ¼ï¼æ”¹ã‚ã¦å…¥åŠ›ã—ã¦ãã ã•ã„ï¼š";
+            if (langmode == 1) {
+                cout << "Input error: Please retry input 'Y' or 'N' : ";
+            }
+            else {
+                cout << "“ü—ÍƒGƒ‰[I‰ü‚ß‚Ä“ü—Í‚µ‚Ä‚­‚¾‚³‚¢F";
+            }
         }
     }
 
     int index = 16;
-    char* buf = new char[index+1];
+    char* buf = new char[index+1](); // new ‚µ‚½ char”z—ñ10ŒÂ‚ğ‰Šú‰»‚·‚é
     memcpy(buf, &str[0], index);
-    buf[index] = '\0';
+    buf[index + 1] = '\0';//memcpy‚µ‚½‚çA––”ö‚É”Ô•ºi'\0'j‚ğ’u‚­‚±‚ÆI
     sbuf = string(buf);
 
+    #if _MYDEBUG
+    cout << "sizeof_char: " << sizeof(char) << endl;
+    cout << "buf_len: " << strlen(buf) << endl;
+    cout << "buf: " << buf << endl;
+    cout << "sbuf_len: " << sbuf.length() << " /sbuf_size: " << sbuf.size() << endl;
+    cout << "sbuf: " << sbuf << endl;
+    #endif
+
+    // “dÔ‚ÅD‚ÌƒRƒ~ƒbƒNƒXƒNƒŠƒvƒg‚©‚Ç‚¤‚©Aƒwƒbƒ_[”»’è‚ğs‚¤B
     if (sbuf != "DEND_COMICSCRIPT") {
         cin.ignore();
-        cout << "DEND comic scriptãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚çµ‚äº†ã—ã¾ã™ã€‚" << endl;
-        getchar();
+        if (langmode == 1) {
+            cout << "The specified file was Don't DEND comic script. Exit this program. " << endl;
+        }
+        else {
+            cout << "DEND comic scriptƒtƒ@ƒCƒ‹‚Å‚Í‚ ‚è‚Ü‚¹‚ñBI—¹‚µ‚Ü‚·B" << endl;
+        }
+        //getchar();
+        system("pause");//‘±s‚·‚é‚É‚Í`‚ÌƒƒbƒZ[ƒW‚ğo‚·B©“®‰»‚ÌÛ‚ÍƒRƒƒ“ƒgƒAƒEƒg‚·‚é‚±‚ÆB
         return -1;
     }
     delete buf;
 
+    // ‚±‚±‚©‚çA‰ğÍ–{‘Ì
     index++;
     cout << "ReadComicImg..." << endl;
     int imgCnt = str[index];
@@ -722,8 +855,14 @@ int main() {
     cin.ignore();
     for (int i = 0; i < num; i++) {
         if (index >= size) {
-            cout << "æ³¨æ„ï¼è¨­å®šã—ãŸã‚³ãƒãƒ³ãƒ‰æ•°(" << num << ")ã¯ã€æ›¸ãè¾¼ã‚“ã ã‚³ãƒãƒ³ãƒ‰æ•°(" << count << ")ã‚ˆã‚Šå¤šãèª­ã‚‚ã†ã¨ã—ã¦ã„ã¾ã™" << endl;
-            getchar();
+            if (langmode == 1) {
+                cout << "Attention! The number of commands you set (" << num << ") is trying to read more than the number of commands you wrote (" << count << ")." << endl;
+            }
+            else {
+                cout << "’ˆÓIİ’è‚µ‚½ƒRƒ}ƒ“ƒh”(" << num << ")‚ÍA‘‚«‚ñ‚¾ƒRƒ}ƒ“ƒh”(" << count << ")‚æ‚è‘½‚­“Ç‚à‚¤‚Æ‚µ‚Ä‚¢‚Ü‚·B" << endl;
+            }
+            //getchar();
+            system("pause");//‘±s‚·‚é‚É‚Í`‚ÌƒƒbƒZ[ƒW‚ğo‚·B©“®‰»‚ÌÛ‚ÍƒRƒƒ“ƒgƒAƒEƒg‚·‚é‚±‚ÆB
             return 0;
         }
         cout << "No." << dec << i << " -> index(";
@@ -736,8 +875,14 @@ int main() {
         index += 2;
 
         if (num2 < 0 || num2 >= CMD_MAX) {
-            cout << "å®šç¾©ã•ã‚Œã¦ãªã„ã‚³ãƒãƒ³ãƒ‰ç•ªå·ã§ã™(" << dec << num2 << ")ã€‚èª­è¾¼ã‚’çµ‚äº†ã—ã¾ã™ã€‚" << endl;
-            getchar();
+            if (langmode == 1) {
+                cout << "This is a command number that is not defined (" << dec << num2 << "). Exit reading." << endl;
+            }
+            else {
+                cout << "’è‹`‚³‚ê‚Ä‚È‚¢ƒRƒ}ƒ“ƒh”Ô†‚Å‚·(" << dec << num2 << ")B“Ç‚ğI—¹‚µ‚Ü‚·B" << endl;
+            }
+            //getchar();
+            system("pause");//‘±s‚·‚é‚É‚Í`‚ÌƒƒbƒZ[ƒW‚ğo‚·B©“®‰»‚ÌÛ‚ÍƒRƒƒ“ƒgƒAƒEƒg‚·‚é‚±‚ÆB
             return 0;
         }
         delete buf;
@@ -759,18 +904,32 @@ int main() {
         }
         cout << "]" << endl;
         if (slowFlag) {
-            getchar();
+            //getchar();
+            system("pause");//‘±s‚·‚é‚É‚Í`‚ÌƒƒbƒZ[ƒW‚ğo‚·B©“®‰»‚ÌÛ‚ÍƒRƒƒ“ƒgƒAƒEƒg‚·‚é‚±‚ÆB
         } else {
             cout << '\n';
         }
         count++;
     }
+    // ‰ğÍ‚Ì–{‘Ì‚±‚±‚Ü‚Å ---
 
-    cout << "æ­£å¸¸ã«èª­ã¿è¾¼ã¿ã§ãã¾ã—ãŸã€‚çµ‚äº†ã—ã¾ã™ã€‚" << endl;
-    if (index < size) {
-        cout << "æ³¨æ„ï¼è¨­å®šã—ãŸã‚³ãƒãƒ³ãƒ‰æ•°(" << count << ")ã¯ã€æ›¸ãè¾¼ã‚“ã ã‚³ãƒãƒ³ãƒ‰æ•°ã‚ˆã‚Šå°‘ãªãè¨­å®šã•ã‚Œã¦ã„ã¾ã™" << endl;
+
+    if (langmode == 1) {
+        cout << "Loaded successfully. Exit this program." << endl;
     }
-    getchar();
+    else {
+        cout << "³í‚É“Ç‚İ‚İ‚Å‚«‚Ü‚µ‚½BI—¹‚µ‚Ü‚·B" << endl;
+    }
+    if (index < size) {
+        if (langmode == 1) {
+            cout << "Warning! The number of commands you set (" << count << ") is less than the number of commands you wrote." << endl;
+        }
+        else {
+            cout << "’ˆÓIİ’è‚µ‚½ƒRƒ}ƒ“ƒh”(" << count << ")‚ÍA‘‚«‚ñ‚¾ƒRƒ}ƒ“ƒh”‚æ‚è­‚È‚­İ’è‚³‚ê‚Ä‚¢‚Ü‚·" << endl;
+        }
+    }
+    //getchar();
+    system("pause");//‘±s‚·‚é‚É‚Í`‚ÌƒƒbƒZ[ƒW‚ğo‚·B©“®‰»‚ÌÛ‚ÍƒRƒƒ“ƒgƒAƒEƒg‚·‚é‚±‚ÆB
 
     return 0;
 }
