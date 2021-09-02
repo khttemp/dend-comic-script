@@ -26,34 +26,13 @@ dend-comic-script は、電車でD 全作品のコミックスクリプトをダ
 このソフトウェアの更新やバグ取りは、作者の義務ではなく解消努力目標とする。
 Issue に上げられたバグ情報が必ず修正されるものではない。
 
-* ライセンス：GPL
+* ライセンス：MIT
 
 電車でD の正式なライセンスを持っていること。
 
 本プログラムに関連して訴訟の必要が生じた場合、東京地方裁判所を第一審の専属的合意管轄裁判所とする。
 
 このプログラムのバイナリを実行した時点で、この規約に同意したものと見なす。
-
-
-## コンパイル方法
-
-* Mingw64 の場合
-
-````
-> g++ script.cpp -o script -static-libgcc -static-libstdc++
-````
-
-* VisualC++ ( cl.exe ) の場合
-
-````
-> cl.exe /MT script.cpp /Fe:script.exe
-````
-
-* Intel OneAPI ( icl.exe ) の場合
-
-````
-> icl.exe /MT /O2 script.cpp /Fe:script.exe
-````
 
 ## 実行方法
 
@@ -70,7 +49,7 @@ script.exe を実行する
 
 ````
 > script.exe
-DEND COMIC SCRIPT ver1.1.4...
+DEND COMIC SCRIPT ver2.0.0...
 comicのbinファイル名を入力してください: comic2900.bin （ ←自分で入力する ）
 見つけました！
 
@@ -78,6 +57,29 @@ ReadComicDataを１行ずつ読みますか？(Y/N)N （ ←自分でYかNを入
 （ 設定値が出力される ）
 正常に読み込みできました。終了します。
 ````
+
+
+### ソースコードの直接実行
+
+Windows であれば以下のコマンドを入力する。
+
+
+````
+> python script.py
+````
+
+### Windows 版実行バイナリ（ .exeファイル ）の作成方法
+
+pyinstaller か py2exe ライブラリをインストールする。 pip でも  easy_install  でも構わない。
+
+下は、 pyinstaller を使用して、Windows 版実行バイナリ（ .exeファイル ）を作る例である。
+
+````
+> pyinstaller script.py --onefile
+````
+
+dist フォルダーが作られて、 script.exe が出力される。
+
 ## よくある質問
 
 * Q. 日本語が文字化けする
