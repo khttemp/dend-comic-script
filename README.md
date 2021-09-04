@@ -101,4 +101,9 @@ dist フォルダーが作られて、 script.exe が出力される。
   * A. ソフトウェア署名などを行っていないので、ブラウザによってはダウンロードがブロックされる
   * A. 同様の理由でセキュリティソフトが実行を拒否することもある。
 
+
+### Virustotal
+
+![virustotal](https://github.com/khttemp/dend-comic-script/blob/main/image/virustotal.png)
+
 以上。
