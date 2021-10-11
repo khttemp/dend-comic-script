@@ -576,11 +576,13 @@ cmd = [
     "STORY_GOTO",
     "PLAY223HONE",
     "RB26",
+    "PLAYORGSE",
+    "H2300_GOAL",
     "SCRIPT_CMD_MAX"
 ]
 
 slowFlag = False
-print("DEND COMIC SCRIPT ver2.0.0...")
+print("DEND COMIC SCRIPT ver2.0.1...")
 file = input("comicのbinファイル名を入力してください: ")
 
 try:
