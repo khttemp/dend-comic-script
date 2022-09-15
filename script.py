@@ -578,11 +578,22 @@ cmd = [
     "RB26",
     "PLAYORGSE",
     "H2300_GOAL",
+    "DEKI_BACK_OPEN",
+    "DEKI_GN_MOVE",
+    "DEKI_TAMIYA_START",
+    "DEKI_GN_START",
+    "DEKI_SOUND",
+    "DEKI_USE_TRANSAM",
+    "DEKI_FRONT_OPEN",
+    "REV_DRIFT",
+    "DEKI_GN_STOP",
+    "STORY_GN",
+    "IS_ONE_TRACK_DRIFT",
     "SCRIPT_CMD_MAX"
 ]
 
 slowFlag = False
-print("DEND COMIC SCRIPT ver2.0.1...")
+print("DEND COMIC SCRIPT ver2.0.2...")
 file = input("comicのbinファイル名を入力してください: ")
 
 try:
