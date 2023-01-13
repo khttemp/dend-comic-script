@@ -81,7 +81,7 @@ pyinstaller か Nuitka ライブラリをインストールする。 pip でも 
 下は、 Nuitka を使用して、Windows 版実行バイナリ（ .exeファイル ）を作る例である。
 
 ````
-> nuitka --mingw64 --standalone --onefile --follow-imports --remove-output script.py
+> nuitka --mingw64 --onefile --follow-imports --remove-output script.py
 ````
 
 dist フォルダーが作られて、 script.exe が出力される。
