@@ -1,5 +1,4 @@
 import struct
-import os
 import sys
 
 cmd = [
@@ -628,7 +627,7 @@ try:
     index += 1
     print()
 
-    #ReadComicImg
+    # ReadComicImg
     print("ReadComicImg...")
     imgCnt = line[index]
     index += 1
@@ -640,7 +639,7 @@ try:
         index += b
     print()
 
-    #ReadComicSize
+    # ReadComicSize
     print("ReadComicSize...")
     b = line[index]
     index += 1
@@ -654,8 +653,8 @@ try:
             index += 4
         print()
     print()
-    
-    #ReadSE
+
+    # ReadSE
     print("ReadSE...")
     secnt = line[index]
     index += 1
@@ -668,7 +667,7 @@ try:
         index += 1
     print()
 
-    #ReadBGM
+    # ReadBGM
     print("ReadBGM...")
     bgmcnt = line[index]
     index += 1
@@ -683,7 +682,7 @@ try:
         index += 4
     print()
 
-    #ReadComicData
+    # ReadComicData
     print("ReadComicData...")
     index += 1
     num = struct.unpack("<H", line[index:index+2])[0]
@@ -708,14 +707,14 @@ try:
             sys.exit()
 
         print("cmd -> {0}({1})".format(cmd[num2], num2))
-            
+
         b = line[index]
         index += 1
         if b >= 16:
             print("script Error!")
             b = 16
         print("cmd_cnt -> {0}".format(b))
-        
+
         array = []
         for j in range(b):
             array.append(struct.unpack("<f", line[index:index+4])[0])
@@ -735,8 +734,8 @@ try:
         print("正常に読み込みできました。終了します。")
     input()
     sys.exit()
-    
-except Exception as e:
+
+except Exception:
     errorMsg = "電車でDのコミックスクリプトではない、またはファイルが壊れた可能性があります。"
     print(errorMsg)
     sys.exit()
